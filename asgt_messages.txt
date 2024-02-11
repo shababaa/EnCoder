@@ -1,0 +1,4 @@
+0
+cat
+dogfish
+x

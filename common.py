@@ -60,7 +60,7 @@ def find_fake(list_of_msgs, list_of_msgs_copy):
     
     for msgs in chosen_msgs:
         chosen_msg = " ".join(msgs)
-        print(f"\nThere is a {chance}% chance {chosen_msg} is a fake message")
+        print(f"\nThere is a {chance}% chance {chosen_msg} is a fake message.")
 
 def pop_from_stack(list_of_msgs, shift_numbers, isFirst=False):
     #remove the last message and shift number from the list

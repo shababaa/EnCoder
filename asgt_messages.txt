@@ -1,9 +1,9 @@
+2 ca34t
 e
-34 manatee
-0 cat
+789 dogfish
 e
-5 toucan
-99 flamingo
-2 caddy
-E
-X
+2 sushaan
+2x5 caddy
+39 lion
+27 abcdefg
+x

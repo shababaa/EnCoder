@@ -62,11 +62,11 @@ def main():
                         else:
                             common.pop_from_stack(list_of_msgs, shift_numbers)
                 elif instruction.lower() == 'x':
-                    file.close()
+                    # if 'x' is encountered, end the program
                     common.find_fake(list_of_msgs, list_of_msgs_copy)
-                    return False
+                    file.close()
             else:
-                print("Invalid line in input file")
+                print(f"Invalid instruction or message line: {line}")                
 
 main()
 input()

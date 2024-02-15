@@ -1,4 +1,9 @@
-0
-cat
-dogfish
+3
+abc!
+def
+ghi
+!@#
+jkl
+mno
+PQR
 x

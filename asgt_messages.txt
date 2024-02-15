@@ -1,9 +1,5 @@
-3
-abc!
-def
-ghi
-!@#
-jkl
-mno
-PQR
-x
+3 hello
+2 stupid
+5 numb lol
+e
+4 x

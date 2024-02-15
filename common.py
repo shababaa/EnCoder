@@ -95,6 +95,26 @@ def encode_file(message, shift_num):
     
     return encoded_message
 
+def encode_part_d(message, shift_num):
+    alph_to_index_dict, index_to_alph_dict = data.alphabet_dictionaries()
+    encoded_message = ""
+
+    if shift_num == "0": #TODO is 'string' correct? 
+        return message
+    
+    for i in range(len(message)):
+        char = message[i]
+        if char == " ":
+            encoded_message += char
+        else:
+            index = alph_to_index_dict[char.lower()]
+            index += shift_num
+            if (index > 25):
+                index = index - 26
+            encoded_char = index_to_alph_dict[index]
+            encoded_message += encoded_char
+
+
 
 def find_fake(list_of_msgs):
     print(list_of_msgs)
@@ -103,4 +123,4 @@ def find_fake(list_of_msgs):
     weights = [chance]*length
     chosen_msg = random.choices(list_of_msgs, weights=weights, k=1)
         
-    print(f"There is a {chance}% chance {chosen_msg} is a fake message") 
+    print(f"There is a {chance}% chance {chosen_msg} is a fake message")

@@ -51,18 +51,16 @@ def main():
             # instruction line
             elif instruction.isalpha() and not instruction.isnumeric():
                 if instruction.lower() == 'e':
+                    # If instruction is 'e' or 'E', remove last message 
+                    # from stack and encode it
                     if len(list_of_msgs) == 0:
                         print ("Encode instruction received but", end=" ")
                         print ("there are no messages left in stack to encode\n")
                     else:
-                        if isFirst:
-                            print("Message:", " ".join(list_of_msgs[-1]))
-                            common.pop_from_stack(list_of_msgs, shift_numbers, isFirst)
-                            isFirst = True
-                        else:
-                            common.pop_from_stack(list_of_msgs, shift_numbers)
+                        print ("Message:", " ".join(list_of_msgs[-1]))
+                        common.pop_from_stack(list_of_msgs, shift_numbers)
                 elif instruction.lower() == 'x':
-                    # if 'x' is encountered, end the program
+                    # if instruction is 'x' or 'X', end the program
                     common.find_fake(list_of_msgs, list_of_msgs_copy)
                     file.close()
             else:

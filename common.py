@@ -63,7 +63,7 @@ def find_fake(list_of_msgs, list_of_msgs_copy):
         print(f"\nThere is a {chance}% chance {chosen_msg} is a fake ", end="")
         print(f"message out of {len(list_of_msgs_copy)} messages\n")
 
-def pop_from_stack(list_of_msgs, shift_numbers, isFirst=False):
+def pop_from_stack(list_of_msgs, shift_numbers):
     #remove the last message and shift number from the list
     removed_msgs = list_of_msgs[-1]
     list_of_msgs.remove(list_of_msgs[-1])
@@ -74,9 +74,8 @@ def pop_from_stack(list_of_msgs, shift_numbers, isFirst=False):
     for message in removed_msgs:
         encoded_msg = encode_message(message, removed_shift_num)
         encoded_msgs.append(encoded_msg)
-    #return encoded_msg
-    if isFirst:
-        print ("Encoded message:", " ".join(encoded_msgs),"\n")
+    
+    print ("Encoded message:", " ".join(encoded_msgs),"\n")
 
 
 def print_msgs_in_list (list_of_msgs):

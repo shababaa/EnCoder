@@ -7,6 +7,7 @@ counter = 0
 open_file = open(file, "r")
 
 readings = open_file.readline()
+print(readings)
 while readings != "":
     readings = readings.split()
     print(readings)

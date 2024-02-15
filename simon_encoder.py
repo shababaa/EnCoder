@@ -7,26 +7,17 @@
 # ability to detect fake messages and print the number of fake messages in the 
 # file.
 
-print ("This program is titled The EnCoder!" + "\n") 
-print ("This program will use data from the file, asgt_messages.txt")
-print ("The each line in the file will contain an instruction or message line.")
-print ("Message lines will contain a shift number to encode the message")
-print ("and the message to be encoded.")
-print ("For instruction lines, 'x' or 'X' will exit the program.")
-print ("And 'e' or 'E' will encode the last messages in the list after")
-print ("removing it.\nHave fun!\n")
-
 import common
-
-# Main function
 
 def main():
     shift_numbers = []
     list_of_msgs = []
+    list_of_msgs_copy = []
     list_of_elements = []
-    total_msgs = 0
     isFirst = True
     close_program = False
+
+    common.print_intro()
 
     file = open("asgt_messages.txt", "r")
     lines = file.readlines()
@@ -37,7 +28,7 @@ def main():
     if first_line.lower().startswith('x'):
         file.close()
         close_program = True
-        print("\nNo messages to encode.\nThe program is now closing.")
+        print("No messages to encode.\nThe program is now closing.")
 
     for line in lines:
         if not close_program:
@@ -54,14 +45,15 @@ def main():
                         print("This message will be skipped.\n")
                         valid = False
                 if valid:
-                    total_msgs += 1
                     shift_numbers.append(list_of_elements[0])
                     list_of_msgs.append(list_of_elements[1:])
+                    list_of_msgs_copy.append(list_of_elements[1:])
             # instruction line
             elif instruction.isalpha() and not instruction.isnumeric():
                 if instruction.lower() == 'e':
                     if len(list_of_msgs) == 0:
-                        print("Encode instruction received but there are no messages left to encode")
+                        print ("Encode instruction received but", end=" ")
+                        print ("there are no messages left in stack to encode\n")
                     else:
                         if isFirst:
                             print("Message:", " ".join(list_of_msgs[-1]))
@@ -71,7 +63,7 @@ def main():
                             common.pop_from_stack(list_of_msgs, shift_numbers)
                 elif instruction.lower() == 'x':
                     file.close()
-                    common.find_fake(list_of_msgs, total_msgs)
+                    common.find_fake(list_of_msgs, list_of_msgs_copy)
                     return False
             else:
                 print("Invalid line in input file")

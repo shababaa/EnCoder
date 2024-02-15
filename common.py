@@ -1,6 +1,16 @@
 import data
 import random
 
+def print_intro ():
+    print ("This program is titled The EnCoder!\n")
+    print ("This program implements Part D of the assignment") 
+    print ("This program will use data from the file, asgt_messages.txt")
+    print ("The each line in the file will contain an instruction or message line")
+    print ("Message lines will contain a shift number to encode the message", end=" ")
+    print ("and the message to be encoded")
+    print ("For instruction lines, 'x' or 'X' will exit the program.")
+    print ("And 'e' or 'E' will encode the last messages in the list after", end=" ")
+    print ("removing it.\nHave fun!\n")
 
 def encode_message (message, shift_num):
     
@@ -32,7 +42,7 @@ def encode_message (message, shift_num):
     
     return encoded_message
 
-def find_fake(list_of_msgs, total_msgs):
+def find_fake(list_of_msgs, list_of_msgs_copy):
     #calculate the chance of a random message being fake
     print("\nRemaining Messages Not Encoded:")
     if not list_of_msgs:
@@ -41,12 +51,12 @@ def find_fake(list_of_msgs, total_msgs):
     for msgs in list_of_msgs:
         print(" ".join(msgs))
 
-    length = total_msgs
+    length = len(list_of_msgs_copy)
     chance = round((100 / length), 1)
     # weigh the chance of a message being fake
-    weights = [chance]*len(list_of_msgs)
+    weights = [chance]*len(list_of_msgs_copy)
     #random choice of message
-    chosen_msgs = random.choices(list_of_msgs, weights=weights, k=1)
+    chosen_msgs = random.choices(list_of_msgs_copy, weights=weights, k=1)
     
     for msgs in chosen_msgs:
         chosen_msg = " ".join(msgs)

@@ -60,12 +60,15 @@ def main():
             # instruction line
             elif instruction.isalpha() and not instruction.isnumeric():
                 if instruction.lower() == 'e':
-                    if isFirst:
-                        print("Message:", " ".join(list_of_msgs[-1]))
-                        common.pop_from_stack(list_of_msgs, shift_numbers, isFirst)
-                        isFirst = True
+                    if len(list_of_msgs) == 0:
+                        print("Encode instruction received but there are no messages left to encode")
                     else:
-                        common.pop_from_stack(list_of_msgs, shift_numbers)
+                        if isFirst:
+                            print("Message:", " ".join(list_of_msgs[-1]))
+                            common.pop_from_stack(list_of_msgs, shift_numbers, isFirst)
+                            isFirst = True
+                        else:
+                            common.pop_from_stack(list_of_msgs, shift_numbers)
                 elif instruction.lower() == 'x':
                     file.close()
                     common.find_fake(list_of_msgs, total_msgs)

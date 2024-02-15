@@ -34,7 +34,7 @@ def encode_message (message, shift_num):
 
 def find_fake(list_of_msgs, total_msgs):
     #calculate the chance of a random message being fake
-    print("Remaining Messages Not Encoded:")
+    print("\nRemaining Messages Not Encoded:")
     if not list_of_msgs:
         print ("No messages to check.\nEnding program")
         return
@@ -50,7 +50,7 @@ def find_fake(list_of_msgs, total_msgs):
     
     for msgs in chosen_msgs:
         chosen_msg = " ".join(msgs)
-        print(f"There is a {chance}% chance {chosen_msg} is a fake message")
+        print(f"\nThere is a {chance}% chance {chosen_msg} is a fake message")
 
 def pop_from_stack(list_of_msgs, shift_numbers, isFirst=False):
     #remove the last message and shift number from the list

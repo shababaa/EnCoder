@@ -53,11 +53,12 @@ def get_message():
             valid_message = True
     return message
     
-def encode_message(message, shift_num):
+def encode_message (message, shift_num):
+    
     alph_to_index_dict, index_to_alph_dict = data.alphabet_dictionaries()
     encoded_message = ""
 
-    if shift_num == 0:
+    if shift_num == 0 or shift_num == 26:
         return message
     
     for i in range(len(message)):
@@ -65,10 +66,16 @@ def encode_message(message, shift_num):
         if char == " ":
             encoded_message += char
         else:
-            index = alph_to_index_dict[char] #TODO.lower() ?
+            index = alph_to_index_dict [char.lower()]
+            if (shift_num > 25):
+                # 26 resets to original index
+                # remainder becomes the new shift number
+                shift_num = shift_num % 26 
             index += shift_num
             if (index > 25):
-                index = index - 26
+                # 26 resets to original index
+                # remainder becomes the new encoded index
+                index = index % 26
             encoded_char = index_to_alph_dict[index]
             encoded_message += encoded_char
     
@@ -78,7 +85,7 @@ def encode_file(message, shift_num):
     alph_to_index_dict, index_to_alph_dict = data.alphabet_dictionaries()
     encoded_message = ""
 
-    if shift_num == "0": #TODO is 'string' correct? 
+    if shift_num == "0": 
         return message
     
     for i in range(len(message)):
@@ -114,13 +121,36 @@ def encode_part_d(message, shift_num):
             encoded_char = index_to_alph_dict[index]
             encoded_message += encoded_char
 
+def find_fake(list_of_msgs, total_msgs):
+    print("\nRemaining Messages Not Encoded:")
+    for msgs in list_of_msgs:
+        print(" ".join(msgs))
 
-
-def find_fake(list_of_msgs):
-    print(list_of_msgs)
-    length = len(list_of_msgs)
+    length = total_msgs
     chance = round((100 / length), 1)
-    weights = [chance]*length
-    chosen_msg = random.choices(list_of_msgs, weights=weights, k=1)
-        
-    print(f"There is a {chance}% chance {chosen_msg} is a fake message")
+    weights = [chance]*len(list_of_msgs)
+    chosen_msgs = random.choices(list_of_msgs, weights=weights, k=1)
+    
+    for msgs in chosen_msgs:
+        chosen_msg = " ".join(msgs)
+        print(f"There is a {chance}% chance {chosen_msg} is a fake message")
+
+def pop_from_stack(list_of_msgs, shift_numbers, isFirst=False):
+    removed_msgs = list_of_msgs[-1]
+    list_of_msgs.remove(list_of_msgs[-1])
+    removed_shift_num = int(shift_numbers[-1])
+    shift_numbers.remove(shift_numbers[-1])
+    encoded_msgs = []
+
+    for message in removed_msgs:
+        encoded_msg = encode_message(message, removed_shift_num)
+        encoded_msgs.append(encoded_msg)
+    
+    if isFirst:
+        print("Encoded messages:")
+
+    print_msgs_in_list(encoded_msgs)
+
+def print_msgs_in_list(list_of_msgs):
+    for message in list_of_msgs:
+        print (message)
